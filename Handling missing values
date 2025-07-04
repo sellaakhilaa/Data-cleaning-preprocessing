@@ -1,0 +1,124 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMErKWzcaLSEJR9gJn6KWlB",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/sellaakhilaa/Data-cleaning-preprocessing/blob/main/Handling%20missing%20values\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Lv4GmsDxnKKF",
+        "outputId": "bdffabf4-6ad1-495b-e6b4-569dc4329d30"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Original Data:\n",
+            "    CustomerID     Name                Email   Age Country\n",
+            "0         101    Alice    alice@example.com  25.0     USA\n",
+            "1         102      Bob                 None   NaN  Canada\n",
+            "2         103  Charlie  charlie@example.com  30.0    None\n",
+            "3         104     None     dave@example.com  22.0     USA\n",
+            "4         105      Eve      eve@example.com   NaN      UK\n",
+            "\n",
+            "Cleaned Data:\n",
+            "    CustomerID     Name                Email        Age Country\n",
+            "0         101    Alice    alice@example.com  25.000000     USA\n",
+            "2         103  Charlie  charlie@example.com  30.000000     USA\n",
+            "3         104  Unknown     dave@example.com  22.000000     USA\n",
+            "4         105      Eve      eve@example.com  25.666667      UK\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "/tmp/ipython-input-1-3534972105.py:19: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.\n",
+            "The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.\n",
+            "\n",
+            "For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.\n",
+            "\n",
+            "\n",
+            "  df[\"Name\"].fillna(\"Unknown\", inplace=True)\n",
+            "/tmp/ipython-input-1-3534972105.py:26: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.\n",
+            "The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.\n",
+            "\n",
+            "For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.\n",
+            "\n",
+            "\n",
+            "  df[\"Age\"].fillna(average_age, inplace=True)\n",
+            "/tmp/ipython-input-1-3534972105.py:30: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.\n",
+            "The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.\n",
+            "\n",
+            "For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.\n",
+            "\n",
+            "\n",
+            "  df[\"Country\"].fillna(mode_country, inplace=True)\n"
+          ]
+        }
+      ],
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "# Sample customer data with missing values\n",
+        "data = {\n",
+        "    \"CustomerID\": [101, 102, 103, 104, 105],\n",
+        "    \"Name\": [\"Alice\", \"Bob\", \"Charlie\", None, \"Eve\"],\n",
+        "    \"Email\": [\"alice@example.com\", None, \"charlie@example.com\", \"dave@example.com\", \"eve@example.com\"],\n",
+        "    \"Age\": [25, None, 30, 22, None],\n",
+        "    \"Country\": [\"USA\", \"Canada\", None, \"USA\", \"UK\"]\n",
+        "}\n",
+        "\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "print(\"Original Data:\\n\", df)\n",
+        "\n",
+        "# --- Handling Missing Values ---\n",
+        "\n",
+        "# 1. Fill missing names with \"Unknown\"\n",
+        "df[\"Name\"].fillna(\"Unknown\", inplace=True)\n",
+        "\n",
+        "# 2. Drop rows with missing Email (critical field)\n",
+        "df.dropna(subset=[\"Email\"], inplace=True)\n",
+        "\n",
+        "# 3. Fill missing Age with average age\n",
+        "average_age = df[\"Age\"].mean()\n",
+        "df[\"Age\"].fillna(average_age, inplace=True)\n",
+        "\n",
+        "# 4. Fill missing country with mode (most frequent country)\n",
+        "mode_country = df[\"Country\"].mode()[0]\n",
+        "df[\"Country\"].fillna(mode_country, inplace=True)\n",
+        "\n",
+        "print(\"\\nCleaned Data:\\n\", df)\n"
+      ]
+    }
+  ]
+}
