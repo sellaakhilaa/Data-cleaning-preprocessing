@@ -1,0 +1,84 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNltkKeG80LM1+hc4D7MbUc",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/sellaakhilaa/Data-cleaning-preprocessing/blob/main/duplicates\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 3,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "s83us6uJl9VR",
+        "outputId": "7412178a-7af2-4f1a-c0fb-939420356f63"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Duplicate emails found:\n",
+            "- hari@example.com\n",
+            "- akhila@example.com\n"
+          ]
+        }
+      ],
+      "source": [
+        "# List of email addresses submitted\n",
+        "email_signups = [\n",
+        "    \"sella@example.com\",\n",
+        "    \"akhila@example.com\",\n",
+        "    \"hari@example.com\",\n",
+        "    \"sellae@example.com\",  # duplicate\n",
+        "    \"akhila@example.com\",\n",
+        "    \"hari@example.com\"     # case-insensitive duplicate\n",
+        "]\n",
+        "\n",
+        "# Normalize emails to lowercase for case-insensitive comparison\n",
+        "normalized_emails = [email.lower() for email in email_signups]\n",
+        "\n",
+        "# Find duplicates\n",
+        "seen = set()\n",
+        "duplicates = set()\n",
+        "\n",
+        "for email in normalized_emails:\n",
+        "    if email in seen:\n",
+        "        duplicates.add(email)\n",
+        "    else:\n",
+        "        seen.add(email)\n",
+        "\n",
+        "# Print the result\n",
+        "if duplicates:\n",
+        "    print(\"Duplicate emails found:\")\n",
+        "    for email in duplicates:\n",
+        "        print(f\"- {email}\")\n",
+        "else:\n",
+        "    print(\"No duplicate emails found.\")\n"
+      ]
+    }
+  ]
+}
