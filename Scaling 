@@ -1,0 +1,77 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyM3TR9BAcXNu2GSGYgPErro",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/sellaakhilaa/Data-cleaning-preprocessing/blob/main/Scaling%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "la3t2cuxqAJO",
+        "outputId": "dbe198a5-a567-465e-eb75-c2b234fa9eae"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Original Data:\n",
+            " [[1]\n",
+            " [2]\n",
+            " [3]\n",
+            " [4]\n",
+            " [5]]\n",
+            "Min-Max Scaled Data:\n",
+            " [[0.  ]\n",
+            " [0.25]\n",
+            " [0.5 ]\n",
+            " [0.75]\n",
+            " [1.  ]]\n"
+          ]
+        }
+      ],
+      "source": [
+        "from sklearn.preprocessing import MinMaxScaler\n",
+        "import numpy as np\n",
+        "\n",
+        "# Example data\n",
+        "data = np.array([[1], [2], [3], [4], [5]])\n",
+        "\n",
+        "# Initialize the scaler\n",
+        "scaler = MinMaxScaler()\n",
+        "\n",
+        "# Fit and transform the data\n",
+        "scaled_data = scaler.fit_transform(data)\n",
+        "\n",
+        "print(\"Original Data:\\n\", data)\n",
+        "print(\"Min-Max Scaled Data:\\n\", scaled_data)\n"
+      ]
+    }
+  ]
+}
