@@ -1,0 +1,93 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNCQfZoUbXHUtgCIFdbljLh",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/sellaakhilaa/Data-cleaning-preprocessing/blob/main/Normalization\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "CvWNervxJdz9",
+        "outputId": "5c64f5e8-5121-4696-d54f-1149d299362b"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[[0.  ]\n",
+            " [0.25]\n",
+            " [0.5 ]\n",
+            " [0.75]\n",
+            " [1.  ]]\n",
+            "[[-1.41421356]\n",
+            " [-0.70710678]\n",
+            " [ 0.        ]\n",
+            " [ 0.70710678]\n",
+            " [ 1.41421356]]\n",
+            "[0.0, 0.25, 0.5, 0.75, 1.0]\n",
+            "[[0.26726124 0.53452248 0.80178373]\n",
+            " [0.45584231 0.56980288 0.68376346]]\n"
+          ]
+        }
+      ],
+      "source": [
+        "from sklearn.preprocessing import MinMaxScaler\n",
+        "import numpy as np\n",
+        "\n",
+        "data = np.array([[10], [20], [30], [40], [50]])\n",
+        "scaler = MinMaxScaler()\n",
+        "normalized_data = scaler.fit_transform(data)\n",
+        "\n",
+        "print(normalized_data)\n",
+        "from sklearn.preprocessing import StandardScaler\n",
+        "\n",
+        "data = np.array([[10], [20], [30], [40], [50]])\n",
+        "scaler = StandardScaler()\n",
+        "standardized_data = scaler.fit_transform(data)\n",
+        "\n",
+        "print(standardized_data)\n",
+        "data = [10, 20, 30, 40, 50]\n",
+        "min_val = min(data)\n",
+        "max_val = max(data)\n",
+        "\n",
+        "normalized = [(x - min_val) / (max_val - min_val) for x in data]\n",
+        "\n",
+        "print(normalized)\n",
+        "from sklearn.preprocessing import normalize\n",
+        "import numpy as np\n",
+        "\n",
+        "data = np.array([[1, 2, 3], [4, 5, 6]])\n",
+        "normalized_data = normalize(data, norm='l2')\n",
+        "\n",
+        "print(normalized_data)\n"
+      ]
+    }
+  ]
+}
